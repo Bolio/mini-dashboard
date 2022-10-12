@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { createTokenThunk } from "../../redux/modules/signin";
+import { createTokenThunk, getInfoUserThunk } from "../../redux/modules/signin";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -27,6 +27,16 @@ const SignIn = () => {
 
     dispatch(createTokenThunk({ email, password }));
   };
+
+  const useToken = useSelector((state) => state.token);
+  console.log("useToken", useToken);
+
+  useEffect(() => {
+    if (useToken) {
+      console.log("useEffect - SignIn.jsx");
+      dispatch(getInfoUserThunk(useToken));
+    }
+  }, [useToken]);
 
   return (
     <main className="form-signin w-100 m-auto">
