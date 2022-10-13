@@ -67,7 +67,7 @@ const Dashboard = () => {
           <div className="h-100 p-5 bg-light border rounded-3">
             <p>Ingresos</p>
             <h5>
-              <b>{revenue}</b> MXN
+              <b>{`$${revenue}.00`}</b> MXN
             </h5>
             {/* CHART */}
             <LineChart dataChart={useInfoDashboard?.revenuePerHour} />
