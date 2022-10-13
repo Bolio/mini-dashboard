@@ -71,11 +71,6 @@ const Dashboard = () => {
             </h5>
             {/* CHART */}
             <LineChart dataChart={useInfoDashboard?.revenuePerHour} />
-            {/* <p>
-              Swap the background-color utility and add a `.text-*` color
-              utility to mix up the jumbotron look. Then, mix and match with
-              additional component themes and more.
-            </p> */}
           </div>
         </div>
 
