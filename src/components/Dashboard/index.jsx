@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getInfoDashboardThunk } from "../../redux/modules/signin";
+import LineChart from "../LineChart";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -69,11 +70,12 @@ const Dashboard = () => {
               <b>{revenue}</b> MXN
             </h5>
             {/* CHART */}
-            <p>
+            <LineChart dataChart={useInfoDashboard?.revenuePerHour} />
+            {/* <p>
               Swap the background-color utility and add a `.text-*` color
               utility to mix up the jumbotron look. Then, mix and match with
               additional component themes and more.
-            </p>
+            </p> */}
           </div>
         </div>
 
