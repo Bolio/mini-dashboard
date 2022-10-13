@@ -82,13 +82,13 @@ const Dashboard = () => {
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket promedio</p>
               <h5>
-                <b>{useInfoDashboard?.averageTicket}</b> MXN
+                <b>{`$${useInfoDashboard?.averageTicket}.00`}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket tope</p>
               <h5>
-                <b>{useInfoDashboard?.topTicket}</b> MXN
+                <b>{`$${useInfoDashboard?.topTicket}.00`}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
