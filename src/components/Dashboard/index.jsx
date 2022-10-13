@@ -38,6 +38,23 @@ const Dashboard = () => {
   );
   // console.log("revenue: ", revenue);
 
+  const paymentMethods = {
+    'other': 'Otros',
+    'cash': 'Efectivo',
+    'card': 'Tarjeta de crédito/débito',
+    'wire transfer': 'Transferencia bancaria',
+  }
+
+  const getPaymentMethod = (method) => {
+    // console.log('method:', method);
+    for (let key in paymentMethods) {
+      if (method === key) {
+        return paymentMethods[key];
+      }
+    }
+    return 'No identificado';
+  }
+
   return (
     <div className="container-fluid">
       <h2>{`Bienvenido ${useInfoUser.name ? userName : ""}`}</h2>
@@ -77,7 +94,7 @@ const Dashboard = () => {
             <div className="p-4 bg-light border rounded-3">
               <p>Método de pago más usado</p>
               <h5>
-                <b>$442,000</b> MXN
+                <b>{getPaymentMethod(useInfoDashboard?.topPaymentMethod)}</b>
               </h5>
             </div>
           </div>
