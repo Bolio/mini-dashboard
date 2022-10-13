@@ -1,5 +1,35 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getInfoDashboardThunk } from "../../redux/modules/signin";
+
 const Dashboard = () => {
-  console.log("Dashboard COMPONENT");
+  const dispatch = useDispatch();
+  const [dataDashboard, setDataDashboard] = useState({});
+
+  const useToken = useSelector((state) => state.token);
+  console.log("useToken", useToken);
+  
+  const useInfoUser = useSelector((state) => state.user);
+  console.log("useInfoUser", useInfoUser);
+
+  const useInfoDashboard = useSelector((state) => state.dashboard);
+  console.log("useInfoDashboard", useInfoDashboard);
+
+  useEffect(() => {
+    if (useToken) {
+      console.log("useEffect - Dashboard.jsx");
+      dispatch(getInfoDashboardThunk(useToken));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (useInfoDashboard) {
+      setDataDashboard(useInfoDashboard);
+      console.log("dataDashboard", dataDashboard);
+    }
+  }, [useInfoDashboard]);
+
   return (
     <div className="container-fluid">
       <h2>Bienvenido</h2>
