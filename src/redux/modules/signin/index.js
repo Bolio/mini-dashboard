@@ -1,6 +1,7 @@
 const initialState = {
   token: undefined,
   user: {},
+  dashboard: {},
 
   fetching: false,
   creating: false,
@@ -12,6 +13,7 @@ const initialState = {
 
 const CREATE_TOKEN = "modules/signin/CREATE_TOKEN";
 const GET_INFO_USER = "modules/signin/GET_INFO_USER";
+const GET_INFO_DASHBOARD = "modules/signin/GET_INFO_DASHBOARD";
 
 // Reducers
 export default function reducer(state = initialState, action = {}) {
@@ -22,6 +24,8 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, token: action?.payload?.token };
     case GET_INFO_USER:
       return { ...state, user: action?.payload };
+    case GET_INFO_DASHBOARD:
+      return { ...state, dashboard: action?.payload };
     default:
       return state;
   }
@@ -40,6 +44,14 @@ export const getInfoUser = (payload) => {
   // console.log("payload - ACTION CREATOR - getInfoUser", payload);
   return {
     type: GET_INFO_USER,
+    payload,
+  };
+};
+
+export const getInfoDashboard = (payload) => {
+  console.log("payload - ACTION CREATOR - getInfoDashboard", payload);
+  return {
+    type: GET_INFO_DASHBOARD,
     payload,
   };
 };
@@ -81,6 +93,27 @@ export const getInfoUserThunk = (values, navigate) => async (dispatch) => {
     const result = await request.json();
     // console.log("result", result);
     await dispatch(getInfoUser(result));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getInfoDashboardThunk = (values, navigate) => async (dispatch) => {
+  console.log("values - getInfoDashboardThunk", values);
+  try {
+    const url = "https://mapi.paycode.com.mx/api/challenge/report";
+
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${values}`,
+      },
+    });
+    // console.log("request", request);
+    const result = await request.json();
+    // console.log("result", result);
+    await dispatch(getInfoDashboard(result));
   } catch (error) {
     console.log(error);
   }
