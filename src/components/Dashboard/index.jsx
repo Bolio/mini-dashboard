@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   const useToken = useSelector((state) => state.token);
   console.log("useToken", useToken);
-  
+
   const useInfoUser = useSelector((state) => state.user);
   console.log("useInfoUser", useInfoUser);
 
@@ -30,9 +30,17 @@ const Dashboard = () => {
     }
   }, [useInfoDashboard]);
 
+  const userName = `${useInfoUser.name} ${useInfoUser.paternalSurname} ${useInfoUser.maternalSurname}`;
+
+  const revenue = useInfoDashboard?.revenuePerHour?.reduce(
+    (previousValue, currentValue) => previousValue + currentValue,
+    0
+  );
+  // console.log("revenue: ", revenue);
+
   return (
     <div className="container-fluid">
-      <h2>Bienvenido</h2>
+      <h2>{`Bienvenido ${useInfoUser.name ? userName : ""}`}</h2>
       <p>
         Reporte de <b>Hoy</b>
       </p>
@@ -41,7 +49,7 @@ const Dashboard = () => {
           <div className="h-100 p-5 bg-light border rounded-3">
             <p>Ingresos</p>
             <h5>
-              <b>$442,000</b> MXN
+              <b>{revenue}</b> MXN
             </h5>
             {/* CHART */}
             <p>
@@ -57,13 +65,13 @@ const Dashboard = () => {
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket promedio</p>
               <h5>
-                <b>$1,200</b> MXN
+                <b>{useInfoDashboard?.averageTicket}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket tope</p>
               <h5>
-                <b>$3,400</b> MXN
+                <b>{useInfoDashboard?.topTicket}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
