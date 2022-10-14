@@ -14,6 +14,7 @@ const initialState = {
 const CREATE_TOKEN = "modules/signin/CREATE_TOKEN";
 const GET_INFO_USER = "modules/signin/GET_INFO_USER";
 const GET_INFO_DASHBOARD = "modules/signin/GET_INFO_DASHBOARD";
+const DELETE_TOKEN = "modules/signin/DELETE_TOKEN";
 
 // Reducers
 export default function reducer(state = initialState, action = {}) {
@@ -26,6 +27,8 @@ export default function reducer(state = initialState, action = {}) {
       return { ...state, user: action?.payload };
     case GET_INFO_DASHBOARD:
       return { ...state, dashboard: action?.payload };
+    case DELETE_TOKEN:
+      return { ...state, token: undefined };
     default:
       return state;
   }
@@ -34,7 +37,7 @@ export default function reducer(state = initialState, action = {}) {
 // Action Creators
 export const createToken = (payload) => {
   // console.log("payload - ACTION CREATOR - createToken", payload);
-  sessionStorage.setItem('accessToken', payload?.token);
+  sessionStorage.setItem("accessToken", payload?.token);
   return {
     type: CREATE_TOKEN,
     payload,
@@ -54,6 +57,13 @@ export const getInfoDashboard = (payload) => {
   return {
     type: GET_INFO_DASHBOARD,
     payload,
+  };
+};
+
+export const deleteToken = () => {
+  console.log("payload - ACTION CREATOR - deleteToken");
+  return {
+    type: DELETE_TOKEN,
   };
 };
 
