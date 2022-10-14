@@ -44,20 +44,20 @@ const SignIn = () => {
   return (
     <main className="form-signin w-100 m-auto">
       <img
-        className="mb-4"
+        className="mb-4 rounded mx-auto d-block"
         src="https://paycode.com.mx/assets/img/paycode/paycode.png"
         alt=""
         width="200"
         height="57"
       />
-      <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+      <h1 className="h3 mb-3 fw-normal text-center">Please sign in</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSignIn}
       >
         <Form>
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <Field
               type="email"
               name="email"
@@ -73,7 +73,7 @@ const SignIn = () => {
             <label htmlFor="floatingInput">Email address</label>
           </div>
 
-          <div className="form-floating">
+          <div className="form-floating mb-3">
             <Field
               type="password"
               name="password"
