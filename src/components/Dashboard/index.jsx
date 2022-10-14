@@ -8,8 +8,11 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const [dataDashboard, setDataDashboard] = useState({});
 
-  const useToken = useSelector((state) => state.token);
-  console.log("useToken", useToken);
+  // const useToken = useSelector((state) => state.token);
+  // console.log("useToken", useToken);
+
+  const useAccessToken = sessionStorage.getItem('accessToken');
+  // console.log('useAccessToken:', useAccessToken);
 
   const useInfoUser = useSelector((state) => state.user);
   console.log("useInfoUser", useInfoUser);
@@ -18,9 +21,8 @@ const Dashboard = () => {
   console.log("useInfoDashboard", useInfoDashboard);
 
   useEffect(() => {
-    if (useToken) {
-      console.log("useEffect - Dashboard.jsx");
-      dispatch(getInfoDashboardThunk(useToken));
+    if (useAccessToken) {
+      dispatch(getInfoDashboardThunk(useAccessToken));
     }
   }, []);
 
