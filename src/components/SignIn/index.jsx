@@ -28,18 +28,18 @@ const SignIn = () => {
     dispatch(createTokenThunk({ email, password }));
   };
 
-  // const useToken = useSelector((state) => state.token);
+  const useToken = useSelector((state) => state.token);
   // console.log("useToken", useToken);
 
-  const useAccessToken = sessionStorage.getItem('accessToken');
+  // const useAccessToken = sessionStorage.getItem('accessToken');
   // console.log('useAccessToken:', useAccessToken);
 
   useEffect(() => {
-    if (useAccessToken) {
-      dispatch(getInfoUserThunk(useAccessToken));
+    if (useToken) {
+      dispatch(getInfoUserThunk(useToken));
       navigate("/dashboard");
     }
-  }, [useAccessToken]);
+  }, [useToken]);
 
   return (
     <main className="form-signin w-100 m-auto">
