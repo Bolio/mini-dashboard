@@ -1,5 +1,7 @@
 const NotFound = () => (
-  <div className="form-signin w-100 m-auto">
+  <div
+    style={{ textAlign: "center" }}
+  >
     <img src="src/assets/Error-404.gif" alt="Page Not Found" />
   </div>
 );
