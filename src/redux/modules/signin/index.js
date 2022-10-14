@@ -34,6 +34,7 @@ export default function reducer(state = initialState, action = {}) {
 // Action Creators
 export const createToken = (payload) => {
   // console.log("payload - ACTION CREATOR - createToken", payload);
+  sessionStorage.setItem('accessToken', payload?.token);
   return {
     type: CREATE_TOKEN,
     payload,
