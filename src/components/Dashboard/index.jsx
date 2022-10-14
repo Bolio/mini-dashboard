@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getInfoDashboardThunk, getInfoUserThunk } from "../../redux/modules/signin";
+import { getInfoDashboardThunk, getInfoUserThunk, deleteToken } from "../../redux/modules/signin";
 import LineChart from "../LineChart";
 
 const Dashboard = () => {
@@ -66,6 +66,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem('accessToken');
+    dispatch(deleteToken());
     navigate("/");
   }
 
