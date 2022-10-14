@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getInfoDashboardThunk } from "../../redux/modules/signin";
+import { getInfoDashboardThunk, getInfoUserThunk } from "../../redux/modules/signin";
 import LineChart from "../LineChart";
 
 const Dashboard = () => {
@@ -23,6 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (useAccessToken) {
       dispatch(getInfoDashboardThunk(useAccessToken));
+      dispatch(getInfoUserThunk(useAccessToken));
     }
   }, []);
 
@@ -33,9 +34,12 @@ const Dashboard = () => {
     }
   }, [useInfoDashboard]);
 
-  const userName = `${useInfoUser.name} ${useInfoUser.paternalSurname} ${useInfoUser.maternalSurname}`;
+  const { name, paternalSurname, maternalSurname } = useInfoUser;
+  const userName = name ? `${name} ${paternalSurname} ${maternalSurname}` : '';
 
-  const revenue = useInfoDashboard?.revenuePerHour?.reduce(
+  const { revenuePerHour, averageTicket, topTicket, topPaymentMethod } = useInfoDashboard;
+
+  const revenue = revenuePerHour?.reduce(
     (previousValue, currentValue) => previousValue + currentValue,
     0
   );
@@ -60,7 +64,7 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid">
-      <h2>{`Bienvenido ${useInfoUser.name ? userName : ""}`}</h2>
+      <h2>{`Bienvenido ${userName}`}</h2>
       <p>
         Reporte de <b>Hoy</b>
       </p>
@@ -69,10 +73,10 @@ const Dashboard = () => {
           <div className="h-100 p-5 bg-light border rounded-3">
             <p>Ingresos</p>
             <h5>
-              <b>{`$${revenue}.00`}</b> MXN
+              <b>{`$${revenue ? revenue : '00'}.00`}</b> MXN
             </h5>
             {/* CHART */}
-            <LineChart dataChart={useInfoDashboard?.revenuePerHour} />
+            <LineChart dataChart={revenuePerHour} />
           </div>
         </div>
 
@@ -81,19 +85,19 @@ const Dashboard = () => {
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket promedio</p>
               <h5>
-                <b>{`$${useInfoDashboard?.averageTicket}.00`}</b> MXN
+                <b>{`$${averageTicket ? averageTicket : '00'}.00`}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
               <p>Ticket tope</p>
               <h5>
-                <b>{`$${useInfoDashboard?.topTicket}.00`}</b> MXN
+                <b>{`$${topTicket ? topTicket : '00'}.00`}</b> MXN
               </h5>
             </div>
             <div className="p-4 bg-light border rounded-3">
               <p>Método de pago más usado</p>
               <h5>
-                <b>{getPaymentMethod(useInfoDashboard?.topPaymentMethod)}</b>
+                <b>{getPaymentMethod(topPaymentMethod)}</b>
               </h5>
             </div>
           </div>
