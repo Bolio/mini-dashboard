@@ -71,7 +71,7 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row">
+      <div className="row mt-3 mb-4">
         <div className="col-md-6">
           <h2>{`Bienvenido ${userName}`}</h2>
           <p>Reporte de <b>Hoy</b></p>
