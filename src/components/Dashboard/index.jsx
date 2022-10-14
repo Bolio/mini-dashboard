@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { getInfoDashboardThunk, getInfoUserThunk } from "../../redux/modules/signin";
 import LineChart from "../LineChart";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dataDashboard, setDataDashboard] = useState({});
 
   // const useToken = useSelector((state) => state.token);
@@ -62,12 +64,24 @@ const Dashboard = () => {
     return 'No identificado';
   }
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('accessToken');
+    navigate("/");
+  }
+
   return (
     <div className="container-fluid">
       <h2>{`Bienvenido ${userName}`}</h2>
       <p>
         Reporte de <b>Hoy</b>
       </p>
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        onClick={() => handleLogout()}
+      >
+        Logout
+      </button>
       <div className="row align-items-md-stretch">
         <div className="col-md-6">
           <div className="h-100 p-5 bg-light border rounded-3">
