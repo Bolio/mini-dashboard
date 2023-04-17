@@ -1,3 +1,5 @@
+const baseURL = process.env.REACT_APP_API;
+
 const initialState = {
   token: undefined,
   user: {},
@@ -70,7 +72,7 @@ export const deleteToken = () => {
 export const createTokenThunk = (values, navigate) => async (dispatch) => {
   // console.log("values - createTokenThunk", values);
   try {
-    const url = "https://mapi.paycode.com.mx/api/challenge/login";
+    const url = `${baseURL}api/challenge/login`;
 
     const request = await fetch(url, {
       method: "POST",
@@ -91,7 +93,7 @@ export const createTokenThunk = (values, navigate) => async (dispatch) => {
 export const getInfoUserThunk = (values, navigate) => async (dispatch) => {
   // console.log("values - getInfoUserThunk", values);
   try {
-    const url = "https://mapi.paycode.com.mx/api/challenge/me";
+    const url = `${baseURL}api/challenge/me`;
 
     const request = await fetch(url, {
       method: "GET",
@@ -112,7 +114,7 @@ export const getInfoUserThunk = (values, navigate) => async (dispatch) => {
 export const getInfoDashboardThunk = (values, navigate) => async (dispatch) => {
   console.log("values - getInfoDashboardThunk", values);
   try {
-    const url = "https://mapi.paycode.com.mx/api/challenge/report";
+    const url = `${baseURL}api/challenge/report`;
 
     const request = await fetch(url, {
       method: "GET",
